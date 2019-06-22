@@ -99,10 +99,6 @@ module Selenium
         raise Error::WebDriverError, "invalid port: #{@port}" if @port < 1
       end
 
-      def uri
-        @uri ||= URI.parse("http://#{@host}:#{@port}")
-      end
-
       protected
 
       def extract_service_args(driver_opts)

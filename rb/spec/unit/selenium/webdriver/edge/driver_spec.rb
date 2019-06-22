@@ -24,7 +24,7 @@ module Selenium
     module EdgeHtml
       describe Driver do
         let(:resp)    { {'value' => {'sessionId' => 'foo', 'capabilities' => Remote::Capabilities.edge.as_json}} }
-        let(:service) { instance_double(Service, start: nil, uri: 'http://example.com') }
+        let(:service) { instance_double(Service) }
         let(:caps)    { Remote::Capabilities.edge }
         let(:http)    { instance_double(Remote::Http::Default, call: resp).as_null_object }
 

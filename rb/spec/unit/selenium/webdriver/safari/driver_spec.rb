@@ -25,13 +25,14 @@ module Selenium
       describe Driver do
         let(:http)    { instance_double(Remote::Http::Default, call: resp).as_null_object }
         let(:resp)    { {'value' => {'sessionId' => 'foo', 'capabilities' => Remote::Capabilities.safari.as_json}} }
-        let(:service) { instance_double(Service, start: true, uri: 'http://example.com') }
+        let(:service) { instance_double(Service) }
         let(:caps)    { Remote::Capabilities.safari }
+        let(:service_manager) { instance_double(ServiceManager, start: true, uri: 'http://example.com') }
 
         before do
           allow(Remote::Capabilities).to receive(:safari).and_return(caps)
-          allow(Service).to receive(:binary_path).and_return('/foo')
-          allow(Service).to receive(:new).and_return(service)
+          allow(Service).to receive_messages(binary_path: '/foo', new: service)
+          allow(ServiceManager).to receive(:new).and_return(service_manager)
         end
 
         it 'accepts server URL' do
