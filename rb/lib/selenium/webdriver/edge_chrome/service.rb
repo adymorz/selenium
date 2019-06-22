@@ -33,7 +33,6 @@ module Selenium
           Unable to find msedgedriver. Please download the server from
           https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/ and place it somewhere on your PATH.
         ERROR
-        SHUTDOWN_SUPPORTED = true
       end # Service
     end # EdgeChrome
   end # WebDriver

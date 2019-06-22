@@ -17,26 +17,16 @@
 # specific language governing permissions and limitations
 # under the License.
 
-require 'selenium/webdriver/ie/driver'
-require 'selenium/webdriver/ie/options'
-
 module Selenium
   module WebDriver
-    module IE
-      def self.driver_path=(path)
-        WebDriver.logger.deprecate 'Selenium::WebDriver::IE#driver_path=',
-                                   'Selenium::WebDriver::IE::Service#driver_path='
-        Selenium::WebDriver::IE::Service.driver_path = path
-      end
+    module Safari
+      #
+      # @api private
+      #
 
-      def self.driver_path
-        WebDriver.logger.deprecate 'Selenium::WebDriver::IE#driver_path',
-                                   'Selenium::WebDriver::IE::Service#driver_path'
-        Selenium::WebDriver::IE::Service.driver_path
-      end
-    end # IE
+      class ServiceManager < WebDriver::ServiceManager
+        SHUTDOWN_SUPPORTED = false
+      end # Service
+    end # Safari
   end # WebDriver
 end # Selenium
-
-require 'selenium/webdriver/ie/service'
-require 'selenium/webdriver/ie/service_manager'

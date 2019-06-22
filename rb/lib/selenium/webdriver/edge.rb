@@ -58,4 +58,6 @@ module Selenium
 end # Selenium
 
 require 'selenium/webdriver/edge_html/service'
+require 'selenium/webdriver/edge_html/service_manager'
 require 'selenium/webdriver/edge_chrome/service'
+require 'selenium/webdriver/edge_chrome/service_manager'

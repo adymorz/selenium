@@ -60,3 +60,4 @@ module Selenium
 end # Selenium
 
 require 'selenium/webdriver/firefox/service'
+require 'selenium/webdriver/firefox/service_manager'

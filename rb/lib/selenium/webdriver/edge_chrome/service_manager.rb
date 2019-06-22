@@ -17,26 +17,18 @@
 # specific language governing permissions and limitations
 # under the License.
 
-require 'selenium/webdriver/ie/driver'
-require 'selenium/webdriver/ie/options'
+require 'selenium/webdriver/chrome/service'
 
 module Selenium
   module WebDriver
-    module IE
-      def self.driver_path=(path)
-        WebDriver.logger.deprecate 'Selenium::WebDriver::IE#driver_path=',
-                                   'Selenium::WebDriver::IE::Service#driver_path='
-        Selenium::WebDriver::IE::Service.driver_path = path
-      end
+    module EdgeChrome
+      #
+      # @api private
+      #
 
-      def self.driver_path
-        WebDriver.logger.deprecate 'Selenium::WebDriver::IE#driver_path',
-                                   'Selenium::WebDriver::IE::Service#driver_path'
-        Selenium::WebDriver::IE::Service.driver_path
-      end
-    end # IE
+      class ServiceManager < Selenium::WebDriver::Chrome::ServiceManager
+        SHUTDOWN_SUPPORTED = true
+      end # Service
+    end # EdgeChrome
   end # WebDriver
 end # Selenium
-
-require 'selenium/webdriver/ie/service'
-require 'selenium/webdriver/ie/service_manager'

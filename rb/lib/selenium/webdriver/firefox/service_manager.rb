@@ -17,26 +17,29 @@
 # specific language governing permissions and limitations
 # under the License.
 
-require 'selenium/webdriver/ie/driver'
-require 'selenium/webdriver/ie/options'
-
 module Selenium
   module WebDriver
-    module IE
-      def self.driver_path=(path)
-        WebDriver.logger.deprecate 'Selenium::WebDriver::IE#driver_path=',
-                                   'Selenium::WebDriver::IE::Service#driver_path='
-        Selenium::WebDriver::IE::Service.driver_path = path
-      end
+    module Firefox
+      #
+      # @api private
+      #
 
-      def self.driver_path
-        WebDriver.logger.deprecate 'Selenium::WebDriver::IE#driver_path',
-                                   'Selenium::WebDriver::IE::Service#driver_path'
-        Selenium::WebDriver::IE::Service.driver_path
-      end
-    end # IE
+      class ServiceManager < WebDriver::ServiceManager
+        SHUTDOWN_SUPPORTED = false
+
+        private
+
+        # Note: This processing is deprecated
+        def extract_service_args(driver_opts)
+          driver_args = super
+          driver_opts = driver_opts.dup
+          driver_args << "--binary=#{driver_opts[:binary]}" if driver_opts.key?(:binary)
+          driver_args << "--log=#{driver_opts[:log]}" if driver_opts.key?(:log)
+          driver_args << "--marionette-port=#{driver_opts[:marionette_port]}" if driver_opts.key?(:marionette_port)
+          driver_args << "--host=#{driver_opts[:host]}" if driver_opts.key?(:host)
+          driver_args
+        end
+      end # Service
+    end # Firefox
   end # WebDriver
 end # Selenium
-
-require 'selenium/webdriver/ie/service'
-require 'selenium/webdriver/ie/service_manager'

@@ -52,3 +52,4 @@ module Selenium
 end # Selenium
 
 require 'selenium/webdriver/chrome/service'
+require 'selenium/webdriver/chrome/service_manager'
