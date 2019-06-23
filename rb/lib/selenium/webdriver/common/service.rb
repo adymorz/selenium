@@ -99,6 +99,16 @@ module Selenium
         raise Error::WebDriverError, "invalid port: #{@port}" if @port < 1
       end
 
+      def launch
+        sm = ServiceManager.new(self)
+        sm.start
+        sm
+      end
+
+      def shutdown_supported
+        self.class::SHUTDOWN_SUPPORTED
+      end
+
       protected
 
       def extract_service_args(driver_opts)

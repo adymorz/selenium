@@ -30,39 +30,6 @@ module Selenium
       SOCKET_LOCK_TIMEOUT = 45
       STOP_TIMEOUT = 20
 
-      class << self
-        attr_reader :driver_path
-
-        def chrome(*args)
-          Chrome::ServiceManager.new(*args)
-        end
-
-        def firefox(*args)
-          Firefox::ServiceManager.new(*args)
-        end
-
-        def ie(*args)
-          IE::ServiceManager.new(*args)
-        end
-        alias_method :internet_explorer, :ie
-
-        def edge(*args)
-          Edge::ServiceManager.new(*args)
-        end
-
-        def edge_chrome(*args)
-          EdgeChrome::ServiceManager.new(*args)
-        end
-
-        def edge_html(*args)
-          EdgeHtml::ServiceManager.new(*args)
-        end
-
-        def safari(*args)
-          Safari::ServiceManager.new(*args)
-        end
-      end
-
       attr_accessor :host
       attr_reader :executable_path
 
@@ -76,8 +43,9 @@ module Selenium
         @executable_path = config.executable_path
         @host = Platform.localhost
         @port = config.port
-
         @extra_args = config.extra_args
+        @shutdown_supported = config.shutdown_supported
+
         raise Error::WebDriverError, "invalid port: #{@port}" if @port < 1
       end
 
@@ -94,7 +62,7 @@ module Selenium
       end
 
       def stop
-        return unless self.class::SHUTDOWN_SUPPORTED
+        return unless @shutdown_supported
 
         stop_server
         @process.poll_for_exit STOP_TIMEOUT

@@ -113,9 +113,9 @@ module Selenium
 
     module EdgeHtml
       describe Driver do
-        let(:service) { instance_double(Service) }
+        let(:service) { instance_double(Service, launch: service_manager) }
         let(:bridge) { instance_double(Remote::Bridge, quit: nil, create_session: {}) }
-        let(:service_manager) { instance_double(ServiceManager, start: true, uri: 'http://example.com') }
+        let(:service_manager) { instance_double(ServiceManager, uri: 'http://example.com') }
 
         before do
           allow(Remote::Bridge).to receive(:new).and_return(bridge)
@@ -130,7 +130,6 @@ module Selenium
         end
 
         it 'is created when :url is not provided' do
-          expect(ServiceManager).to receive(:new).and_return(service_manager)
           expect(Service).to receive(:new).and_return(service)
 
           described_class.new

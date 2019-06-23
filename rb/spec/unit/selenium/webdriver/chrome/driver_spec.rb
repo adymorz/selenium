@@ -24,15 +24,14 @@ module Selenium
     module Chrome
       describe Driver do
         let(:resp)    { {'value' => {'sessionId' => 'foo', 'capabilities' => Remote::Capabilities.chrome.as_json}} }
-        let(:service) { instance_double(Service) }
-        let(:service_manager) { instance_double(ServiceManager, start: true, uri: 'http://example.com') }
+        let(:service) { instance_double(Service, launch: service_manager) }
+        let(:service_manager) { instance_double(ServiceManager, uri: 'http://example.com') }
         let(:caps)    { Remote::Capabilities.new }
         let(:http)    { instance_double(Remote::Http::Default, call: resp).as_null_object }
 
         before do
           allow(Remote::Capabilities).to receive(:chrome).and_return(caps)
           allow(Service).to receive_messages(binary_path: '/foo', new: service, executable_path: nil)
-          allow(ServiceManager).to receive(:new).and_return(service_manager)
         end
 
         it 'sets the proxy capabilitiy' do

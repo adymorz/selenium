@@ -32,6 +32,7 @@ module Selenium
           https://chromedriver.storage.googleapis.com/index.html and place it somewhere on your PATH.
           More info at https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver.
         ERROR
+        SHUTDOWN_SUPPORTED = true
 
         private
 

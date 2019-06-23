@@ -304,8 +304,7 @@ module Selenium
                                         args: opts.delete(:driver_opts),
                                         path: opts.delete(:driver_path),
                                         port: opts.delete(:port))
-        @service = ServiceManager.send(browser, service_config)
-        @service.start
+        @service = service_config.launch
         @service.uri
       end
     end # Driver

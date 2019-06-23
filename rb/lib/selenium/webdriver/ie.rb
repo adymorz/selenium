@@ -39,4 +39,3 @@ module Selenium
 end # Selenium
 
 require 'selenium/webdriver/ie/service'
-require 'selenium/webdriver/ie/service_manager'

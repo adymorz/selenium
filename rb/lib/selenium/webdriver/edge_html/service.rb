@@ -31,6 +31,7 @@ module Selenium
           Unable to find MicrosoftWebDriver. Please install it following instructions
           at https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/.
         ERROR
+        SHUTDOWN_SUPPORTED = false
 
         private
 

@@ -30,8 +30,7 @@ module Selenium
 
         before do
           allow(Remote::Capabilities).to receive(:internet_explorer).and_return(caps)
-          allow(Service).to receive(:binary_path).and_return('/foo')
-          allow(Service).to receive(:new).and_return(service)
+          allow(Service).to receive_messages(binary_path: '/foo', new: service)
         end
 
         it 'accepts server URL' do

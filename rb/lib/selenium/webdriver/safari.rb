@@ -63,4 +63,3 @@ module Selenium
 end # Selenium
 
 require 'selenium/webdriver/safari/service'
-require 'selenium/webdriver/safari/service_manager'
